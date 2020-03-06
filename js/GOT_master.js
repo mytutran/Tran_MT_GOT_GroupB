@@ -8,7 +8,8 @@
       playButton = lightBox.querySelectorAll(".play-button"),
       closeButton = lightBox.querySelector(".close-button"),
       currentHouseName = document.querySelector("h1"),
-      houseDetails = document.querySelector(".house-info");
+      houseDetails = document.querySelector(".house-info"),
+      imageContainer = document.querySelector("#houseImages");
 
   // order is important here
   const houseData = [
@@ -40,7 +41,7 @@
     houseDetails.textContent = `${houseData[this.dataset.offset][1]}`;
 
     let targetSource = `videos/House-${newSource}.mp4`;
-    debugger;
+    //debugger;
     //show the lightbox on a click
     lightBox.classList.add("show-lightbox");
 
@@ -70,9 +71,25 @@
     houseVideo.play();
   }
 
+  function animateBanners () {
+    // clicking on the shield should trigger an animation
+    // figure out how far the banners should move with some simple math
+
+    let offsetWidth = 600;
+    let multiplier = this.dataset.offset;
+    let newPosition = offsetWidth * multiplier;
+
+    //debugger;
+    // change the style.left property to match the new position - where it needs to move to
+    imageContainer.style.right = `${newPosition}px`;
+  }
+
 
   // event handling for our sigilButtons
+
+  // animate the banners on a click
   sigilButtons.forEach(button => button.addEventListener("click", showLightBox));
+  sigilButtons.forEach(button => button.addEventListener("click", animateBanners));
 
   // add some event handling for the lightbox close button
   closeButton.addEventListener("click", hideLightBox);

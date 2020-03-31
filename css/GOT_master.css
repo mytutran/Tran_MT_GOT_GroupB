@@ -169,6 +169,18 @@ main {
   cursor: pointer;
 }
 
+.volumeStyling::-moz-slider-thumb {
+  -moz-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border: 1px solid;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 1px 1px 1px #000;
+  cursor: pointer;
+}
+
 .volumeStyling {
   -webkit-appearance: none;
   -moz-appearance: none;

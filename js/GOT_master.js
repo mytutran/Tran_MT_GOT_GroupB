@@ -24,8 +24,20 @@
     ["Arryn", `House Arryn of the Eyrie is one of the Great Houses of Westeros. It has ruled over the Vale of Arryn for millennia, originally as the Kings of Mountain and Vale and more recently as Lords Paramount of the Vale and Wardens of the East under the Targaryen kings and Baratheon-Lannister kings. The nominal head of House Arryn is Robin Arryn, the Lord of the Eyrie, with his stepfather Petyr Baelish acting as Lord Protector until he reaches the age of majority. `]
   ];
 
-  //functions go in the middle -> what do we want our app to do?
 
+  function showLightBox(multi, name, source, current, details) {
+      //show the lightbox on a click
+      lightBox.classList.add("show-lightbox");
+
+      //play the lightbox video when it opens
+      let targetSource = `videos/House-${newSource}.mp4`;
+      houseVideo.src = targetSource;
+      houseVideo.addEventListener("ended", function () {
+          hideLightBox();
+        })
+      houseVideo.load();
+      houseVideo.play();
+    }
 
   function hideLightBox () {
     lightBox.classList.remove("show-lightbox");
@@ -43,73 +55,42 @@
     if(houseVideo.paused)
             {
                 houseVideo.play();
-                //document.getElementById("play").innerHTML="Pause";
             }
             else
             {
                houseVideo.pause();
-               //document.getElementById("Pause").innerHTML="Play";
             }
   }
 
-  function animateBanners () {
-    // clicking on the shield should trigger an animation
-    // figure out how far the banners should move with some simple math
-
+  function animateBanners (multiplier, houseName, newSource, currentName, currentDetails, callback) {
+    currentHouseName.textContent = currentName;
+    houseDetails.textContent = currentDetails;
     let offsetWidth = 600;
-    let multiplier = this.dataset.offset;
     let newPosition = offsetWidth * multiplier;
-
-    //debugger;
-    // change the style.left property to match the new position - where it needs to move to
-    let houseName = this.className.split(" ")[1];
-
-    // capitalize the first letter of the house name with Javscript
-    // and then add the rest of the house name to it
-    let newSource = houseName.charAt(0).toUpperCase() + houseName.slice(1);
-
-    //use this variable to populate the h1 element on the page
-    currentHouseName.textContent = `House ${houseData[this.dataset.offset][0]}`;
-
-    //this variable is pointing at the paragraph tag under the h1 -> this is the house description
-    houseDetails.textContent = `${houseData[this.dataset.offset][1]}`;
-
-    let targetSource = `videos/House-${newSource}.mp4`;
-
     imageContainer.style.right = `${newPosition}px`;
-
-    function showLightBox() {
-      // debugger;
-      // retrieve the CSS class that matches the video name in video folder
-
-
-      //debugger;
-
-      //show the lightbox on a click
-      lightBox.classList.add("show-lightbox");
-
-      //play the lightbox video when it opens
-      houseVideo.src = targetSource;
-      houseVideo.addEventListener("ended", function () {
-          hideLightBox();
-        })
-      houseVideo.load();
-      houseVideo.play();
-    }
-
-    setTimeout(showLightBox, 1500);
   }
 
+  //Volume Settings
   var setVolume = function() { houseVideo.volume = this.value / 100; };
   volumeSettings.forEach(drag => drag.addEventListener("change", setVolume));
   volumeSettings.forEach (drag => drag.addEventListener("input", setVolume));
 
-  //setTimeout(animateBanners, 10000);
-  // event handling for our sigilButtons
 
+  // event handling for our sigilButtons
   // animate the banners on a click
-  //sigilButtons.forEach(button => button.addEventListener("click", showLightBox));
-  sigilButtons.forEach(button => button.addEventListener("click", animateBanners));
+  sigilButtons.forEach(button => button.addEventListener("click", function(){
+    animateBanners(
+      button.dataset.offset,
+      houseName = button.className.split(" ")[1],
+      newSource = houseName.charAt(0).toUpperCase() + houseName.slice(1),
+      `House ${houseData[button.dataset.offset][0]}`,
+      `${houseData[button.dataset.offset][1]}`,
+      //for animation to finish performing
+      setTimeout(showLightBox, 1500)
+  );
+  }));
+
+
 
   // add some event handling for the lightbox close button
   closeButton.addEventListener("click", hideLightBox);

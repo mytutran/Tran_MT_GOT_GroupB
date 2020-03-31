@@ -40,21 +40,12 @@
   <!--put our lightbox on the top of the stack -->
   <section class="lightbox">
     <span class="close-button">X</span>
-
-    <video src="videos/House-Stark.mp4"></video>
-
-    <div class="vid-controls">
-      <span class="pause-button">
-        <button>Pause</button>
-      </span>
-
-      <span class="play-button">
-        <button>Play</button>
-      </span>
-
-      <span class="rewind-button">
-        <button>Rewind</button>
-      </span>
+    <div id="videoWrapper">
+      <video src="videos/House-Stark.mp4"  type="video/mp4" controls></video>
+      <div class="vid-controls">
+          <button class="play-button"></button>
+          <button class="rewind-button"></button>
+      </div>
     </div>
 
   </section>

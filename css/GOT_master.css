@@ -58,7 +58,7 @@ main {
 	overflow:hidden;
 	background-image:url(../images/GOT_sprites.png);
 	background-repeat:no-repeat;
-	transition:transform .3s;
+	transition: transform .3s;
 	-webkit-transition:-webkit-transform .3s;
 	-moz-transition:-moz-transform .3s;
 }
@@ -121,10 +121,45 @@ main {
   padding-right:30px;
 }
 
-video {
-	width: 40%;
-	margin-left: 0 auto;
+#videoWrapper{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin-top: 10%;
+}
+
+.vid-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.play-button {
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+  border: none;
+  background: url(../images/play_button.svg) center no-repeat;
+  transition-delay: 0.5s ease;
+}
+
+.rewind-button {
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+  border: none;
+  background: url(../images/rewind_button.svg) center no-repeat;
+}
+
+.play-button:hover, .rewind-button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+video {
+	width: 50%;
 	border: thin solid #949393;
 }
 

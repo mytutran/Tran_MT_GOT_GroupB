@@ -3,6 +3,7 @@
   let sigilButtons = document.querySelectorAll(".sigilContainer"),
       lightBox = document.querySelector(".lightbox"),
       houseVideo = lightBox.querySelector("video"),
+      volumeSettings = lightBox.querySelectorAll(".volume-settings"),
       rewindButton = lightBox.querySelectorAll(".rewind-button"),
       playButton = lightBox.querySelectorAll(".play-button"),
       closeButton = lightBox.querySelector(".close-button"),
@@ -51,8 +52,6 @@
             }
   }
 
-
-
   function animateBanners () {
     // clicking on the shield should trigger an animation
     // figure out how far the banners should move with some simple math
@@ -100,6 +99,10 @@
 
     setTimeout(showLightBox, 1500);
   }
+
+  var setVolume = function() { houseVideo.volume = this.value / 100; };
+  volumeSettings.forEach(drag => drag.addEventListener("change", setVolume));
+  volumeSettings.forEach (drag => drag.addEventListener("input", setVolume));
 
   //setTimeout(animateBanners, 10000);
   // event handling for our sigilButtons

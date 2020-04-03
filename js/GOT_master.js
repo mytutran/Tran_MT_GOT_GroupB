@@ -28,7 +28,6 @@
   function showLightBox(multi, name, source, current, details) {
       //show the lightbox on a click
       lightBox.classList.add("show-lightbox");
-
       //play the lightbox video when it opens
       let targetSource = `videos/House-${newSource}.mp4`;
       houseVideo.src = targetSource;
